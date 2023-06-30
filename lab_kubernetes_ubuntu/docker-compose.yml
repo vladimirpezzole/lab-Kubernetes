@@ -1,0 +1,13 @@
+version: '3'
+services:
+  lab_kubernetes_ubuntu:
+    image: lab_kubernetes_ubuntu
+    container_name: "Lab-Kubernetes-Ubuntu"
+    ports:
+      - '9083:80'
+      - '9084:3306'
+    working_dir: /app/
+    tty: true
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ./app/:/app/

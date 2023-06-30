@@ -1,0 +1,20 @@
+---
+- hosts: localhost
+  become: true
+  tasks:
+    - name: Instalar dependências do sistema
+      apt:
+        name: "{{ item }}"
+        state: present
+      loop:
+        - docker.io
+        - curl
+
+    - name: Instalar Kind
+      shell: curl -Lo ./kind https://kind.sigs.k8s.io/dl/v0.20.0/kind-linux-amd64 && chmod +x ./kind && mv ./kind /usr/local/bin/kind
+
+    - name: Instalar kubectl
+      shell: curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl" && chmod +x kubectl && mv kubectl /usr/local/bin/kubectl
+
+    # Outras tarefas de configuração do Kubernetes, se necessário
+
